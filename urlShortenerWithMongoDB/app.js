@@ -7,6 +7,10 @@ var MongoClient = require("mongodb").MongoClient;
 var dbUrl = "mongodb://heroku_7rpcp6qs:samvk6sgru0hvp2ch24kadghn8@ds149535.mlab.com:49535/heroku_7rpcp6qs";
 var result;
 
+//app.use('/new', ni);
+//app.use('/', ei);
+
+//#region tests
 //var findDocuments = function (db, callback) {
 //    // Get the documents collection
 //    var collection = db.collection('url-shortenerDB');
@@ -23,7 +27,7 @@ var result;
 //        //return docs
 //    });
 //}
-
+//#endregion
 console.log(port);
 
 app.get('/new*', function (req, res) {
@@ -34,10 +38,22 @@ app.get('/new*', function (req, res) {
     //res.send("youre at /new*" + JSON.stringify(end));
 });
 
-app.get('/+', function (req, res) {
-    ei(req.query);
+app.get('/robots*', function (req, res) {
+    
+    var out = { original : -1, index : "Please Enter a valid Path" };
+    
+    res.send(JSON.stringify(out));
 })
 
+app.get('/*', function (req, res) {
+    ei(req.originalUrl, function (data) {
+        console.log("Incoming data:\n", +JSON.stringify(data));
+        res.send(JSON.stringify(data));
+    });
+})
+
+
+//#region tests2
 //app.get('*', function (req, res) {
     
 //    MongoClient.connect(dbUrl, function (err, db) {
@@ -66,6 +82,7 @@ app.get('/+', function (req, res) {
     
     
 //})
+//#endregion
 
 app.listen(port, function () {
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
