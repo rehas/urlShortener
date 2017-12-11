@@ -55,6 +55,22 @@ app.get('/robots*', function (req, res) {
     res.send(JSON.stringify(out));
 })
 
+app.get('/', function (req, res) {
+    res.end("<p>Created by Berat Reha Sonmez -- frontpage(this page) Credits to: Rafael Rodriguez</p>" +
+"<h1> FreeCodeCamp API Basejump: URL Shortener Microservice</h1>"+
+"<blockquote><p>User stories:</p><ul><li>I can pass a URL as a parameter and I will receive a shortened URL in the JSON response.</li></ul><li>When I visit that shortened URL, it will redirect me to my original link.</li></blockquote>"+
+"<h3>Example creation usage:</h3>"+
+"<code>https://little-url.herokuapp.com/new/https://www.google.com</code>"+
+"<br>"+
+"<code>https://little-url.herokuapp.com/new/http://foo.com:80</code>"+
+"<h3>Example creation output</h3>"+
+"<code>{}</code>"+
+"<h3>Usage:</h3>"+
+"<code>https://little-url.herokuapp.com/2871</code>"+
+"<h3>Will redirect to:</h3>"+
+"<code>https://www.google.com/</code>" );
+})
+
 app.get('/*', function (req, res) {
     ei(req.originalUrl, function (data) {
         console.log("Incoming data:\n", +JSON.stringify(data));
