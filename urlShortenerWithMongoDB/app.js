@@ -42,7 +42,7 @@ app.get('/new*', function (req, res) {
         console.log("Json stringified data:\n " + JSON.stringify(data));
         out.index = data.index;
         out.original = data.original;
-        out.shortUrl = req.headers.host + '/' + data.index;
+        out.shortUrl = "https://"+ req.headers.host + '/' + data.index;
         res.send(JSON.stringify(out));
     })
     //res.send("youre at /new*" + JSON.stringify(end));
