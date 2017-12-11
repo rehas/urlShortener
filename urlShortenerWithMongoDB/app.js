@@ -31,9 +31,19 @@ var result;
 console.log(port);
 
 app.get('/new*', function (req, res) {
+    
+    var out = {
+        index : -1,
+        original : "",
+        shortUrl : ""
+    };
+
     ni(req.originalUrl, function (data) {
         console.log("Json stringified data:\n " + JSON.stringify(data));
-        res.send(JSON.stringify(data));
+        out.index = data.index;
+        out.original = data.original;
+        out.shortUrl = req.headers.host + '/' + data.index;
+        res.send(JSON.stringify(out));
     })
     //res.send("youre at /new*" + JSON.stringify(end));
 });
@@ -48,7 +58,16 @@ app.get('/robots*', function (req, res) {
 app.get('/*', function (req, res) {
     ei(req.originalUrl, function (data) {
         console.log("Incoming data:\n", +JSON.stringify(data));
-        res.send(JSON.stringify(data));
+
+        if (data.index !== -1) {
+            console.log("Redirecting Page");
+            res.redirect(data.original);
+            
+        } else {
+            res.send(JSON.stringify(data));
+        
+        }
+
     });
 })
 

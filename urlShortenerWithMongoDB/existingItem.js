@@ -22,8 +22,11 @@ module.exports = function (str, callback) {
             console.log("Doc is " + JSON.stringify(docs));
             if (docs !== null) {
                 console.log("We've got docs from existing item search");
-
+                
                 callback(docs);
+            } else {
+                callback({ index : -1, original: "Item with ID provided does not exist" });
+            
             }
         })
 
